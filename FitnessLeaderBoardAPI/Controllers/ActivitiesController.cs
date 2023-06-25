@@ -40,9 +40,9 @@ namespace FitnessLeaderBoardAPI.Controllers
 
         // POST api/<ActivityModelController>
         [HttpPost]
-        public async Task<IActionResult> AddActivity(ActivityModel activity, string email)
+        public async Task<IActionResult> AddActivity(ActivityModel activity, int id)
         {
-            var user = await _context.Users.Where(u  => u.Email == email).FirstOrDefaultAsync();
+            var user = await _context.Users.FindAsync(id);
             if (user != null)
             {
                 activity.UserId = user.Id;

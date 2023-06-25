@@ -8,7 +8,6 @@
 
         public string Email { get; set; }
 
-        public List<ActivityModel> Activities { get; set; }
 
     }
 }

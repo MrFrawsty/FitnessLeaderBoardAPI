@@ -29,6 +29,19 @@ namespace FitnessLeaderBoardAPI.Controllers
             return Ok(await _context.Users.ToListAsync());
         }
 
+        [HttpGet]
+        [Route("GetUserId")]
+        public async Task<IActionResult> GetUserId(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+
+            return NotFound();
+        }
+
         // GET api/<ActivityModelController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
@@ -44,7 +57,7 @@ namespace FitnessLeaderBoardAPI.Controllers
 
         // POST api/<ActivityModelController>
         [HttpPost]
-        public async Task<IActionResult> AddUser(UserModel user, string email)
+        public async Task<IActionResult> AddUser(UserModel user)
         {            
                _context.Add(user);
                await _context.SaveChangesAsync();
