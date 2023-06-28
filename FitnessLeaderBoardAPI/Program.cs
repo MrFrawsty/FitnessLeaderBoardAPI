@@ -17,7 +17,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication();
 builder.Services.AddSqlite<FitnessLeaderboardDbContext>(connectionString);
-
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+});
 
 var app = builder.Build();
 
@@ -33,6 +36,8 @@ app.UseHttpsRedirection();
 app.UseMiddleware<ApiKeyAuthMiddleware>();
 
 app.UseAuthentication();
+
+app.UseCors(options => options.AllowAnyOrigin());
 
 app.MapControllers();
 

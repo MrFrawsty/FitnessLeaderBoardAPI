@@ -2,6 +2,7 @@
 using FitnessLeaderBoardAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessLeaderBoardAPI.Controllers
 {
@@ -16,17 +17,17 @@ namespace FitnessLeaderBoardAPI.Controllers
             _context = context;
         }
         // GET: UserActivitiesController
-
+                
         //TODO can this be awaited??
         [HttpGet]
-        public async Task<IActionResult> GetUsersActivities(int id)
+        public async Task<IActionResult> GetUserActivities(int id)
         {
-            var usersActivities = new List<ActivityModel>();
+            var usersActivities = await _context.Activities.Where(a => a.UserId == id).ToListAsync();
 
-            foreach(var activity in _context.Activities.Where(a => a.UserId == id))
-            {
-                usersActivities.Add(activity);
-            }
+            //foreach(var activity in _context.Activities.Where(a => a.UserId == id))
+            //{
+            //    usersActivities.Add(activity);
+            //}
 
             if(usersActivities.Count > 0)
             {

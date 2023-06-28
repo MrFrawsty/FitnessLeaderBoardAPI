@@ -42,7 +42,7 @@ namespace FitnessLeaderBoardAPI.Controllers
             return NotFound();
         }
 
-        // GET api/<ActivityModelController>/5
+        // GET api/<ActivityModelController>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
@@ -81,16 +81,16 @@ namespace FitnessLeaderBoardAPI.Controllers
             return NotFound();
         }
 
-        // DELETE api/<ActivityModelController>/5
+        // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteActivity(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            var activity = await _context.Activities.FindAsync(id);
-            if (activity != null)
+            var user = await _context.Users.FindAsync(id);
+            if (user != null)
             {
-                _context.Remove(activity);
+                _context.Remove(user);
                 _context.SaveChanges();
-                return Ok(activity);
+                return Ok(user);
             }
 
             return NotFound();
