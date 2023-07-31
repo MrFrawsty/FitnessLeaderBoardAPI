@@ -24,9 +24,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
-	<Target Name="PrePublishTarget" AfterTargets="Publish">
+	<!--<Target Name="PrePublishTarget" AfterTargets="Publish">
 		<Exec Command="dotnet ef database update" />
-	</Target>
+	</Target>-->
 
 	<ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
