@@ -5,9 +5,7 @@
     "dotnet-ef": {
       "version": "7.0.9",
       "commands": [
-        "dotnet-ef",
-        "dotnet new tool-manifest",
-        "dotnet tool install dotnet-ef"
+        "dotnet-ef"
       ]
     },
     "swashbuckle.aspnetcore.cli": {
