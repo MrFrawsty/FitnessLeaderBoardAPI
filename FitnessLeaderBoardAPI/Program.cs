@@ -33,7 +33,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-//app.UseMiddleware<ApiKeyAuthMiddleware>();
+app.UseMiddleware<ApiKeyAuthMiddleware>();
 
 app.UseAuthentication();
 

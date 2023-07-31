@@ -22,7 +22,7 @@
 
             var ApiKey = _config.GetValue<string>(AuthConstants.ApiKeySectionName);
 
-            if (!ApiKey.Equals(ExtractedKey))
+            if (ApiKey != null && !ApiKey.Equals(ExtractedKey))
             {
                 context.Response.StatusCode = 401;
                 await context.Response.WriteAsync("Invalid Api Key");
