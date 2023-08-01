@@ -22,6 +22,11 @@ namespace FitnessLeaderBoardAPI.Controllers
             _context = context;
         }
 
+
+        [Route("/error")]
+        public IActionResult HandleError() =>
+            Problem();
+
         // GET: api/<ActivityModelController>
         [HttpGet]
         public async Task<IActionResult> GetUsers()
