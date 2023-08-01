@@ -22,7 +22,15 @@ namespace FitnessLeaderBoardAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetActivities()
         {
-            return Ok(await _context.Activities.ToListAsync());
+            try
+            {
+               return Ok(await _context.Activities.ToListAsync());
+            }
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.InnerException.Message);
+            }
         }
 
         // GET api/<ActivityModelController>/5
