@@ -31,7 +31,12 @@ var app = builder.Build();
     app.UseSwaggerUI();
 //}
 
-app.UseDeveloperExceptionPage();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
 
 app.UseHttpsRedirection();
 
