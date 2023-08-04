@@ -20,6 +20,7 @@ namespace FitnessLeaderBoardAPI.Controllers
         public UsersController(FitnessLeaderboardDbContext context)
         {
             _context = context;
+            _context.Database.EnsureCreated();
         }
 
 
