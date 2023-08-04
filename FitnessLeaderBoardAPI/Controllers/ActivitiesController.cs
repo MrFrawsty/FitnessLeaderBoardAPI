@@ -27,14 +27,15 @@ namespace FitnessLeaderBoardAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetActivities()
         {
-            try
+            var activities = await _context.Activities.ToListAsync();
+            if(activities != null)
             {
                return Ok(await _context.Activities.ToListAsync());
             }
 
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, ex.InnerException.Message);
+                return NotFound();
             }
         }
 
