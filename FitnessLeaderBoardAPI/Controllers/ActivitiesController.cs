@@ -17,6 +17,7 @@ namespace FitnessLeaderBoardAPI.Controllers
         public ActivitiesController(FitnessLeaderboardDbContext context)
         {
             _context = context;
+            _context.Database.EnsureCreated();
         }
 
 
