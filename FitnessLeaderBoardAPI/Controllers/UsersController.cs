@@ -88,6 +88,7 @@ namespace FitnessLeaderBoardAPI.Controllers
         }
 
         // DELETE api/<UsersController>/5
+        [HttpPut]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
