@@ -3,11 +3,12 @@ using FitnessLeaderBoardAPI.Data;
 using FitnessLeaderBoardAPI.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("FitnessLeaderboard") ?? "Data Source=FitnessLeaderboardDbContext.db";
+//var connectionString = builder.Configuration.GetConnectionString("FitnessLeaderboard") ?? "Data Source=FitnessLeaderboardDbContext.db";
 
 // Add services to the container.
 
@@ -16,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication();
-builder.Services.AddSqlite<FitnessLeaderboardDbContext>(connectionString);
+builder.Services.AddDbContext<FitnessLeaderboardDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("FitnessLeaderboard"))); 
 builder.Services.AddCors(c =>
 {
     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
@@ -32,11 +33,6 @@ if (app.Environment.IsDevelopment())
 }
 
 
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
-}
 
 app.UseHttpsRedirection();
 
