@@ -45,9 +45,9 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<ApiKeyAuthMiddleware>();
 
-app.UseAuthentication();
-
 app.UseCors(AllowedOrigins);
+
+app.UseAuthentication();
 
 app.MapControllers();
 
