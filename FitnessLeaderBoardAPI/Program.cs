@@ -21,7 +21,8 @@ builder.Services.AddCors(options =>
             policy
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials();
+            .AllowCredentials()
+            .AllowAnyOrigin();
             
             
         });
@@ -47,7 +48,7 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<ApiKeyAuthMiddleware>();
 
-app.UseCors(AllowedOrigins);
+app.UseCors();
 
 app.UseAuthentication();
 
