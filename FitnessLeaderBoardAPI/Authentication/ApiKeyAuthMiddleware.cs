@@ -13,6 +13,12 @@
 
         public async Task InvokeAsync(HttpContext context)
         {
+
+            if(context.Request.Method == "OPTIONS") 
+            {
+              context.Response.StatusCode = 200;
+                return;
+            }
             if(!context.Request.Headers.TryGetValue(AuthConstants.ApiKeyHeaderName, out var ExtractedKey))
             {
                 context.Response.StatusCode = 401;
