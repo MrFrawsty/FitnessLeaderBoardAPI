@@ -15,14 +15,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: AllowedOrigins,
+    options.AddDefaultPolicy(
         policy =>
         {
             policy
             .AllowAnyHeader()
-            .AllowAnyMethod();
-            
-            
+            .AllowAnyMethod()
+            .SetIsOriginAllowed((host) => true);
+
+
+
         });
 });
 builder.Services.AddControllers();
@@ -46,7 +48,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<ApiKeyAuthMiddleware>();
 
-app.UseCors(AllowedOrigins);
+app.UseCors();
+//what is useAuthorization
+app.UseAuthentication();
 
 app.MapControllers();
 
