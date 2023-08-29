@@ -48,8 +48,6 @@ app.UseMiddleware<ApiKeyAuthMiddleware>();
 
 app.UseCors(AllowedOrigins);
 
-app.UseAuthentication();
-
 app.MapControllers();
 
 app.Run();
