@@ -51,7 +51,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication();
 builder.Services.Configure<APICredentials>(builder.Configuration);
 
-builder.Services.AddDbContext<FitnessLeaderboardDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("FitnessLeaderboard"))); 
+//builder.Services.AddDbContext<FitnessLeaderboardDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("FitnessLeaderboard"))); 
+builder.Services.AddDbContext<FitnessLeaderboardDbContext>(options => options.UseNpgsql(Environment.GetEnvironmentVariable(AuthConstants.DbConnectionString)));
 
 var app = builder.Build();
 
