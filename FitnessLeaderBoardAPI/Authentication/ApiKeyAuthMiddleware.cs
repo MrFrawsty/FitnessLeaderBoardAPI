@@ -26,7 +26,6 @@
                 return;
             }
  
-            // var ApiKey = _config.GetValue<string>(AuthConstants.ApiKeySectionName);
             var ApiKey = Environment.GetEnvironmentVariable(AuthConstants.ApiKeyHeaderName);
 
             if (ApiKey != null && !ApiKey.Equals(ExtractedKey))
