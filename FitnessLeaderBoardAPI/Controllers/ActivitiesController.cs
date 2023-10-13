@@ -21,14 +21,14 @@ namespace FitnessLeaderBoardAPI.Controllers
         }
 
 
-       
+
         [HttpGet]
         public async Task<IActionResult> GetActivities()
         {
             var activities = await _context.Activities.ToListAsync();
-            if(activities != null)
+            if (activities != null)
             {
-               return Ok(await _context.Activities.ToListAsync());
+                return Ok(await _context.Activities.ToListAsync());
             }
 
             else
@@ -56,15 +56,17 @@ namespace FitnessLeaderBoardAPI.Controllers
         {
             var id = activity.UserId;
             var user = await _context.Users.FindAsync(id);
-            if (user != null)
+            if (user == null)
             {
-                activity.UserId = user.Id;
-                _context.Add(activity);
-                await _context.SaveChangesAsync();
-                return Ok(activity);
+                return new NoContentResult();
             }
 
-            return NotFound();
+
+            activity.UserId = user.Id;
+            _context.Add(activity);
+            await _context.SaveChangesAsync();
+            return Ok(activity);
+
         }
 
 
