@@ -34,7 +34,7 @@ namespace FitnessLeaderBoardAPI.Controllers
             return Ok(await _context.Users.ToListAsync());
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetUserId")]
         public async Task<IActionResult> GetUserId([FromBody]string email) 
         {
