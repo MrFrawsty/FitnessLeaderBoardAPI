@@ -1,10 +1,12 @@
 ﻿using FitnessLeaderBoardAPI.Data;
 using FitnessLeaderBoardAPI.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.Buffers.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
@@ -34,9 +36,10 @@ namespace FitnessLeaderBoardAPI.Controllers
 
         [HttpGet]
         [Route("GetUserId")]
-        public async Task<IActionResult> GetUserId(string email)
+        public async Task<IActionResult> GetUserId([FromBody]string email) 
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+            
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
             if (user != null)
             {
                 return Ok(user);
