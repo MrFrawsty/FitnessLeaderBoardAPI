@@ -87,19 +87,6 @@ namespace FitnessLeaderBoardAPI.Controllers
             return NotFound();
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> DeleteActivityTemp(int id)
-        {
-            var activity = await _context.Activities.FindAsync(id);
-            if (activity != null)
-            {
-                _context.Remove(activity);
-                _context.SaveChanges();
-                return Ok(activity);
-            }
-
-            return new NoContentResult();
-        }
 
 
         // DELETE api/<ActivityModelController>/5
