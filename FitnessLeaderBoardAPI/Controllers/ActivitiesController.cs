@@ -54,7 +54,7 @@ namespace FitnessLeaderBoardAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddActivity(ActivityModel activity)
         {
-            activity.CreatedAt = DateTime.Now;
+            activity.CreatedAt = DateTime.UtcNow;
            
             var id = activity.UserId;
             var user = await _context.Users.FindAsync(id);
