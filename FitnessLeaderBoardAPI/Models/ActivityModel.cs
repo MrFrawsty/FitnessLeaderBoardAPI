@@ -10,6 +10,8 @@ namespace FitnessLeaderBoardAPI.Models
         public string? Description { get; set; }
         public double Minutes { get; set; }
         public int UserId { get; set; }
+        public string? UserName { get; set; }
+        public DateTime? CreatedAt { get; set;}
 
     }
 }
