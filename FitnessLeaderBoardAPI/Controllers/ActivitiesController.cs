@@ -58,17 +58,17 @@ namespace FitnessLeaderBoardAPI.Controllers
            
             var id = activity.UserId;
             var user = await _context.Users.FindAsync(id);
-            if (user == null)
+
+            if (user != null)
             {
-                return NotFound();
+                activity.UserId = user.Id;
+                activity.UserName = user.Name;
+                _context.Add(activity);
+                await _context.SaveChangesAsync();
+                return Ok(activity);
             }
 
-
-            activity.UserId = user.Id;
-            activity.UserName = user.Name;
-            _context.Add(activity);
-            await _context.SaveChangesAsync();
-            return Ok(activity);
+                return NotFound();
 
         }
 
