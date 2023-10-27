@@ -1,6 +1,7 @@
 ﻿using FitnessLeaderBoardAPI.Data;
 using FitnessLeaderBoardAPI.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Buffers.Text;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
@@ -64,10 +66,23 @@ namespace FitnessLeaderBoardAPI.Controllers
         // POST api/<ActivityModelController>
         [HttpPost]
         public async Task<IActionResult> AddUser(UserModel user)
-        {            
+        {
+            var email = user.Email;
+            var existingUser = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
+
+            if (existingUser != null)
+            {
+                return Conflict(existingUser);
+            }
+
+            if(user != null)
+            {
                _context.Add(user);
                await _context.SaveChangesAsync();
                return Ok(user);
+            }
+
+            return NotFound();
         }
 
 
