@@ -14,18 +14,18 @@
         public async Task InvokeAsync(HttpContext context)
         {
 
-            if(context.Request.Method == "OPTIONS") 
+            if (context.Request.Method == "OPTIONS")
             {
-              context.Response.StatusCode = 200;
+                context.Response.StatusCode = 200;
                 return;
             }
-            if(!context.Request.Headers.TryGetValue(AuthConstants.ApiKeyHeaderName, out var ExtractedKey))
+            if (!context.Request.Headers.TryGetValue(AuthConstants.ApiKeyHeaderName, out var ExtractedKey))
             {
                 context.Response.StatusCode = 401;
                 await context.Response.WriteAsync("Api Key missing");
                 return;
             }
- 
+
             var ApiKey = Environment.GetEnvironmentVariable(AuthConstants.ApiKeyHeaderName);
 
             if (ApiKey != null && !ApiKey.Equals(ExtractedKey))
@@ -34,7 +34,13 @@
                 await context.Response.WriteAsync("Invalid Api Key");
             }
 
-            await _next(context);
+            if (!context.Response.HasStarted)
+            {
+
+                await _next(context);
+            }
+
+
         }
     }
 }
