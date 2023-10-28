@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Activities": {
+    "/api/Activities/GetActivities": {
       "get": {
         "tags": [
           "Activities"
@@ -15,7 +15,32 @@
             "description": "Success"
           }
         }
-      },
+      }
+    },
+    "/api/Activities/GetActivityById/{id}": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Activities/AddActivity": {
       "post": {
         "tags": [
           "Activities"
@@ -46,28 +71,7 @@
         }
       }
     },
-    "/api/Activities/{id}": {
-      "get": {
-        "tags": [
-          "Activities"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
+    "/api/Activities/UpdateActivity/{id}": {
       "put": {
         "tags": [
           "Activities"
@@ -107,7 +111,9 @@
             "description": "Success"
           }
         }
-      },
+      }
+    },
+    "/api/Activities/DeleteActivity/{id}": {
       "delete": {
         "tags": [
           "Activities"
@@ -130,7 +136,7 @@
         }
       }
     },
-    "/api/UserActivities": {
+    "/api/UserActivities/GetUserActivities": {
       "get": {
         "tags": [
           "UserActivities"
@@ -195,7 +201,7 @@
         }
       }
     },
-    "/api/Users/GetUser/{id}": {
+    "/api/Users/GetUserById/{id}": {
       "get": {
         "tags": [
           "Users"
@@ -249,27 +255,10 @@
         }
       }
     },
-    "/api/Users/UpdateUser/{id}": {
+    "/api/Users/UpdateUser": {
       "put": {
         "tags": [
           "Users"
-        ],
-        "parameters": [
-          {
-            "name": "email",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "requestBody": {
           "content": {
@@ -312,18 +301,6 @@
               "format": "int32"
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Users/DeleteUser": {
-      "put": {
-        "tags": [
-          "Users"
         ],
         "responses": {
           "200": {

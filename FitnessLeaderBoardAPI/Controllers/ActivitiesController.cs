@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace FitnessLeaderBoardAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ActivitiesController : ControllerBase
     {
@@ -39,7 +39,7 @@ namespace FitnessLeaderBoardAPI.Controllers
 
         // GET api/<ActivityModelController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetActivity(int id)
+        public async Task<IActionResult> GetActivityById(int id)
         {
             var activity = await _context.Activities.FindAsync(id);
             if (activity != null)

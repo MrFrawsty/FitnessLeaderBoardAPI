@@ -37,7 +37,7 @@ namespace FitnessLeaderBoardAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetUserId([FromBody]string email) 
+        public async Task<IActionResult> GetUserByEmail([FromBody]string email) 
         {
             
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
@@ -51,7 +51,7 @@ namespace FitnessLeaderBoardAPI.Controllers
 
         // GET api/<ActivityModelController>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(int id)
+        public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user != null)
@@ -87,7 +87,6 @@ namespace FitnessLeaderBoardAPI.Controllers
 
         // PUT api/<ActivityModelController>/5
         [HttpPut]
-       // [Route("UpdateUser")]
         public async Task<IActionResult> UpdateUser(UserModel userModel)
         {
             var userToUpdate = await _context.Users.FindAsync(userModel.Id);
@@ -103,7 +102,6 @@ namespace FitnessLeaderBoardAPI.Controllers
         }
 
         // DELETE api/<UsersController>/5
-        [HttpPut]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
