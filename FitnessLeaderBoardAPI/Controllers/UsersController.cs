@@ -69,23 +69,23 @@ namespace FitnessLeaderBoardAPI.Controllers
 
 
         // PUT api/<ActivityModelController>/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(string email, UserModel userModel)
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(UserModel userModel)
         {
-            var userToUpdate = await _context.Users.FindAsync(email);
+            var userToUpdate = await _context.Users.FirstOrDefaultAsync(u => u.Id == userModel.Id && u.Email.ToLower() == userModel.Email.ToLower());
             if (userToUpdate != null)
             {
-                userToUpdate.Email = email;
+                userToUpdate.Email = userModel.Email;
                 userToUpdate.Name = userModel.Name;
                 await _context.SaveChangesAsync();
                 return Ok(userModel);
             }
 
-            return NotFound();
+            return NotFound("User Id and Email Do Not Match.");
         }
 
         // DELETE api/<UsersController>/5
-        [HttpPut]
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
