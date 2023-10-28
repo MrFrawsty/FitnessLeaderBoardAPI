@@ -15,7 +15,7 @@ using System.Text.Encodings.Web;
 
 namespace FitnessLeaderBoardAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -37,8 +37,7 @@ namespace FitnessLeaderBoardAPI.Controllers
         }
 
         [HttpPost]
-        [Route("GetUserId")]
-        public async Task<IActionResult> GetUserId([FromBody]string email) 
+        public async Task<IActionResult> GetUserByEmail([FromBody]string email) 
         {
             
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
@@ -88,6 +87,7 @@ namespace FitnessLeaderBoardAPI.Controllers
 
         // PUT api/<ActivityModelController>/5
         [HttpPut("{id}")]
+       // [Route("UpdateUser")]
         public async Task<IActionResult> UpdateUser(string email, UserModel userModel)
         {
             var userToUpdate = await _context.Users.FindAsync(email);
