@@ -37,7 +37,7 @@ namespace FitnessLeaderBoardAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetUserByEmail([FromBody]string email) 
+        public async Task<IActionResult> GetUserId([FromBody]string email) 
         {
             
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
@@ -86,14 +86,14 @@ namespace FitnessLeaderBoardAPI.Controllers
 
 
         // PUT api/<ActivityModelController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
        // [Route("UpdateUser")]
-        public async Task<IActionResult> UpdateUser(string email, UserModel userModel)
+        public async Task<IActionResult> UpdateUser(UserModel userModel)
         {
-            var userToUpdate = await _context.Users.FindAsync(email);
+            var userToUpdate = await _context.Users.FindAsync(userModel.Id);
             if (userToUpdate != null)
             {
-                userToUpdate.Email = email;
+                userToUpdate.Email = userModel.Email;
                 userToUpdate.Name = userModel.Name;
                 await _context.SaveChangesAsync();
                 return Ok(userModel);
